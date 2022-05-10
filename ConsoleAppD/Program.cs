@@ -5,16 +5,15 @@ public class Program
     public static void Main(string[] args)
     {
 
+        using (StreamReader file = new StreamReader("C:\\Users\\Brux\\Downloads\\testD\\tests\\20"))
         {
             char[] alphabeth = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray();
             int[] usedLetterFirst = new int[alphabeth.Length];
-            int[] usedLetterSecond = new int[alphabeth.Length];
 
             Array.Fill(usedLetterFirst, 0);
-            Array.Fill(usedLetterSecond, 0);
 
-            var firstWord = Console.ReadLine();
-            var secondWord = Console.ReadLine();
+            var firstWord = file.ReadLine();
+            var secondWord = file.ReadLine();
 
             char[] aaa = firstWord.ToCharArray();
             char[] bbb = secondWord.ToCharArray();
@@ -37,29 +36,49 @@ public class Program
             for (int i = 0; i < firstWord.Length; i++)
             {
                 var letterFirstWord = aaa[i];
-                var letterSecondWord = bbb[i];
 
                 var indFirst = Array.IndexOf(alphabeth, letterFirstWord);
-                var indSecond = Array.IndexOf(alphabeth, letterSecondWord);
 
                 if (indFirst >= 0)
                 {
                     usedLetterFirst[indFirst]++;
                 }
+            }
 
-                if (indSecond >= 0)
+
+           // Console.WriteLine(String.Join(" ", alphabeth));
+            //Console.WriteLine(String.Join(" ", usedLetterFirst));
+
+
+            var trimmedalpha = alphabeth;
+
+            for (int i = 0; i < usedLetterFirst.Length; i++)
+            {
+                if (usedLetterFirst[i] == 0)
                 {
-                    usedLetterSecond[indSecond]++;
+                    trimmedalpha[i] = ' ';
                 }
             }
 
-            for (int i = 0; i < secondWord.Length; i++)
+            char charToRemove = ' ';
+            trimmedalpha = trimmedalpha.Where(val => val != charToRemove).ToArray();
+
+            int numToRemove = 0;
+            usedLetterFirst = usedLetterFirst.Where(val => val != numToRemove).ToArray();
+
+
+           // Console.WriteLine(String.Join(" ", trimmedalpha));
+           // Console.WriteLine(String.Join(" ", usedLetterFirst));
+
+
+
+           for (int i = 0; i < secondWord.Length; i++)
             {
 
                 if (bbb[i] != ' ')
                 {
                     var letterSecondWord = bbb[i];
-                    var indSecond = Array.IndexOf(alphabeth, letterSecondWord);
+                    var indSecond = Array.IndexOf(trimmedalpha, letterSecondWord);
 
                     if (indSecond >= 0)
                     {
@@ -76,6 +95,12 @@ public class Program
 
                 }
             }
+            
+
+  //          Console.WriteLine(String.Join(" ", trimmed));
+
+//            Console.WriteLine(String.Join("", usedLetterFirst));
+
             Console.WriteLine(String.Join("", resultCharArr));
         }
     }
