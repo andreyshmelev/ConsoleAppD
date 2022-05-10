@@ -5,7 +5,6 @@ public class Program
     public static void Main(string[] args)
     {
 
-        using (StreamReader file = new StreamReader("C:\\Users\\Brux\\Downloads\\testD\\tests\\03"))
         {
             char[] alphabeth = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray();
             int[] usedLetterFirst = new int[alphabeth.Length];
@@ -14,8 +13,8 @@ public class Program
             Array.Fill(usedLetterFirst, 0);
             Array.Fill(usedLetterSecond, 0);
 
-            var firstWord = file.ReadLine();
-            var secondWord = file.ReadLine();
+            var firstWord = Console.ReadLine();
+            var secondWord = Console.ReadLine();
 
             char[] aaa = firstWord.ToCharArray();
             char[] bbb = secondWord.ToCharArray();
